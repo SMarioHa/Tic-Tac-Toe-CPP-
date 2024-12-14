@@ -43,10 +43,16 @@ bool playfield::add_in_field(char Character) {
 		//New Line so we are always on new Line.
 		std::cout << "\n" << "Input a Field from 1-9 (From top left to down right.)";
 		std::cin >> userIndex;
-		if (userIndex == 0 || (userIndex < 1 && userIndex > 9)) CANT_END_LOOP = true;
+		bool is_not_in_Range = (userIndex < 1 && userIndex > 9);
+		if (is_not_in_Range)
+		{
+			CANT_END_LOOP = true;
+		}
+		//This gives Buffer Overflow warning, but should be no Problem since we filter out all outputs which arent 1-9
 		else if (this->field[userIndex - 1] != ' ')
 		{
 			std::cout << "pick a none Empty Field Mate.";
+			CANT_END_LOOP = true;
 		}
 		else{
 			//decrease by one to make sure we match Array Index
